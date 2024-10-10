@@ -43,11 +43,7 @@ func (c *Config) Validate() error {
 func FromConfigFile() (*Config, error) {
 	configFilePath := os.Getenv("JUJU_DNS_PLUGIN_CONF_PATH")
 	if configFilePath == "" {
-		home, err := os.UserHomeDir()
-		if err != nil {
-			return nil, err
-		}
-		configFilePath = path.Join(home, ".local/share/juju-dns", "juju-dns-plugin.yaml")
+		configFilePath = path.Join("/etc", "config.yaml")
 	}
 	file, err := os.Open(configFilePath)
 	if err != nil {
