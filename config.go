@@ -43,7 +43,7 @@ func (c *Config) Validate() error {
 func FromConfigFile() (*Config, error) {
 	configFilePath := os.Getenv("JUJU_DNS_PLUGIN_CONF_PATH")
 	if configFilePath == "" {
-		configFilePath = path.Join("/etc", "config.yaml")
+		configFilePath = path.Join("/var/snap/juju-dns/common", "juju-dns-config.yaml")
 	}
 	file, err := os.Open(configFilePath)
 	if err != nil {
@@ -57,6 +57,8 @@ func FromConfigFile() (*Config, error) {
 	if err := d.Decode(&config); err != nil {
 		return nil, err
 	}
+
+	log.Error("*** Config: %+v", config)
 
 	ttl := defaultTTL
 	if config.Ttl == nil {
