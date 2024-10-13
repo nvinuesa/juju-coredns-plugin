@@ -19,7 +19,7 @@ type Config struct {
 type Controller struct {
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
-	address  string `yaml:"address"`
+	Address  string `yaml:"address"`
 }
 
 func (c *Config) Validate() error {
@@ -33,7 +33,7 @@ func (c *Config) Validate() error {
 		if controller.Password == "" {
 			return errors.New(fmt.Sprintf("password is required in controller %q", controllerName))
 		}
-		if controller.address == "" {
+		if controller.Address == "" {
 			return errors.New(fmt.Sprintf("address is required in controller %q", controllerName))
 		}
 	}
@@ -57,8 +57,6 @@ func FromConfigFile() (*Config, error) {
 	if err := d.Decode(&config); err != nil {
 		return nil, err
 	}
-
-	log.Error("*** Config: %+v", config)
 
 	ttl := defaultTTL
 	if config.Ttl == nil {

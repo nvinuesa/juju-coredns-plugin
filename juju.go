@@ -72,7 +72,7 @@ func (j *Juju) GetUnitAddress(ctx context.Context, controller Controller, modelT
 
 func (j *Juju) GetConnection(controllerName, modelUUID string, controller Controller) (api.Connection, error) {
 	opts := connector.SimpleConfig{
-		ControllerAddresses: []string{controller.address},
+		ControllerAddresses: []string{controller.Address},
 		Username:            controller.Username,
 		Password:            controller.Password,
 	}
